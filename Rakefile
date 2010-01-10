@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rubygems'
 require 'rake'
 
@@ -5,12 +7,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "magic"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "qoobaa+github@gmail.com"
+    gem.summary = %Q{Ruby bindings for Magic}
+    gem.description = %Q{Ruby bindings for Magic}
+    gem.email = "qoobaa@gmail.com"
     gem.homepage = "http://github.com/qoobaa/magic"
     gem.authors = ["Jakub Kuźma"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_dependency "ffi", ">= 0.5.1"
+    gem.add_development_dependency "test-unit", ">= 2.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
