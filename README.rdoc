@@ -36,13 +36,13 @@ Install magic library using your package manager, e.g.:
 
 === Mac OS
 
-If you don't have :libmagic.1.dylib: file in your system, you need to
+If you don't have <tt>libmagic.1.dylib</tt> file in your system, you need to
 install it via port command:
 
   sudo port install file
 
-Sometimes you'll also need to set your +DYLD_FALLBACK_LIBRARY_PATH+
-environment variable to the directory of the +libmagic.1.dylib+:
+Sometimes you'll also need to set your <tt>DYLD_FALLBACK_LIBRARY_PATH</tt>
+environment variable to the directory of the <tt>libmagic.1.dylib</tt>:
 
   export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
 
