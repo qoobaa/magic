@@ -30,13 +30,13 @@ be printed.
 
 === Linux
 
-Install libmagic using your package manager, e.g.:
+Install magic library using your package manager, e.g.:
 
   sudo apt-get install file
 
 === Mac OS
 
-If you don't have +libmagic.1.dylib+ file in your system, you need to
+If you don't have :libmagic.1.dylib: file in your system, you need to
 install it via port command:
 
   sudo port install file
