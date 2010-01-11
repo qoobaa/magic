@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>File: README.rdoc [magic 0.1.0
+  <title>File: README.rdoc [magic 0.2.0
 ]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -54,7 +54,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>2010-01-11 13:51:04 +0100</td>
+      <td>2010-01-11 21:40:31 +0100</td>
     </tr>
     </table>
   </div>
@@ -67,29 +67,21 @@
     <div id="description">
       <h1>magic</h1>
 <p>
-Ruby FFI bindings to the &#8220;magic&#8221; library. Determines content
-type and encoding of files and strings. There are three sets of tests,
-performed in this order: filesystem tests, magic number tests, and language
-tests. The first test that succeeds causes the file type to be printed.
+Ruby FFI wrapper to the &#8220;magic&#8221; library, that determines
+content type and encoding of files and strings. The library does three
+types of tests: filesystem tests, magic number tests, and language tests.
+The first test that succeeds causes the file type to be returned.
 </p>
-<h2>Usage</h2>
-<pre>
-  require &quot;magic&quot;
-  Magic.guess_file_mime(&quot;public/images/rails.png&quot;)
-  # =&gt; &quot;image/png; charset=binary&quot;
-  Magic.guess_file_mime_encoding(&quot;public/images/rails.png&quot;)
-  # =&gt; &quot;binary&quot;
-  Magic.guess_file_mime_type(&quot;public/images/rails.png&quot;)
-  # =&gt; &quot;image/png&quot;
-  Magic.guess_string_mime(&quot;Magic® File™&quot;)
-  # =&gt; &quot;text/plain; charset=utf-8&quot;
-  Magic.guess_string_mime_encoding(&quot;Magic® File™&quot;)
-  # =&gt; &quot;utf-8&quot;
-  Magic.guess_string_mime_type(&quot;Magic® File™&quot;)
-  # =&gt; &quot;text/plain&quot;
-</pre>
+<h2>Installation and Usage</h2>
+<p>
+See <a href="http://jah.pl/projects/magic.html">project page</a> for
+details.
+</p>
 <h2>Links</h2>
 <ul>
+<li><a href="http://jah.pl/projects/magic.html">project page</a>
+
+</li>
 <li><a href="http://gemcutter.org/gems/magic">gemcutter</a>
 
 </li>

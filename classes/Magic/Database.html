@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: Magic::Database [magic 0.1.0
+  <title>Class: Magic::Database [magic 0.2.0
 ]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -92,19 +92,23 @@
 
       <div class="name-list">
 
-        <a href="#M000012">buffer</a>&nbsp;&nbsp;
+        <a href="#M000013">buffer</a>&nbsp;&nbsp;
 
-        <a href="#M000009">close</a>&nbsp;&nbsp;
+        <a href="#M000016">calculate_flags</a>&nbsp;&nbsp;
 
-        <a href="#M000013">error</a>&nbsp;&nbsp;
+        <a href="#M000010">close</a>&nbsp;&nbsp;
 
-        <a href="#M000011">file</a>&nbsp;&nbsp;
+        <a href="#M000014">error</a>&nbsp;&nbsp;
 
-        <a href="#M000010">load</a>&nbsp;&nbsp;
+        <a href="#M000012">file</a>&nbsp;&nbsp;
 
-        <a href="#M000007">new</a>&nbsp;&nbsp;
+        <a href="#M000015">flags=</a>&nbsp;&nbsp;
 
-        <a href="#M000008">open</a>&nbsp;&nbsp;
+        <a href="#M000011">load</a>&nbsp;&nbsp;
+
+        <a href="#M000008">new</a>&nbsp;&nbsp;
+
+        <a href="#M000009">open</a>&nbsp;&nbsp;
 
       </div>
     </div>
@@ -117,6 +121,24 @@
 
 
 
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">flags</td>
+
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+
+          <td class="context-item-desc"></td>
+        </tr>
+
+        </table>
+      </div>
+    </div>
+
 
     <!-- if method_list -->
 
@@ -125,14 +147,14 @@
       <h3 class="section-bar">Public Class methods</h3>
 
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
 
         <div class="method-heading">
 
-          <a href="#M000007" class="method-signature">
+          <a href="#M000008" class="method-signature">
 
-          <span class="method-name">new</span><span class="method-args">(*flags)</span>
+          <span class="method-name">new</span><span class="method-args">(*args)</span>
 
           </a>
 
@@ -141,17 +163,20 @@
         <div class="method-description">
 
           <p>
-Creates an instance of +Magic::Database+ using given flags
+Creates an instance of +Magic::Database+ using given database file and
+flags
 </p>
 
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000007-source">
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 4</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
-      <span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
-      <span class="ruby-identifier">load</span>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 7</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {} <span class="ruby-comment cmt"># extract options</span>
+      <span class="ruby-identifier">database</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:database</span>)
+      <span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">load</span>(<span class="ruby-identifier">database</span>)
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -163,12 +188,12 @@ Creates an instance of +Magic::Database+ using given flags
       <h3 class="section-bar">Public Instance methods</h3>
 
 
-      <div id="method-M000012" class="method-detail">
-        <a name="M000012"></a>
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
 
         <div class="method-heading">
 
-          <a href="#M000012" class="method-signature">
+          <a href="#M000013" class="method-signature">
 
           <span class="method-name">buffer</span><span class="method-args">(string)</span>
 
@@ -183,119 +208,12 @@ Determine type of given string
 </p>
 
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000012-source">
-<pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 36</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">string</span>)
-      <span class="ruby-identifier">result</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_buffer</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-identifier">string</span>, <span class="ruby-identifier">string</span>.<span class="ruby-identifier">bytesize</span>)
-      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">null?</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Exception</span>, <span class="ruby-identifier">error</span>
-      <span class="ruby-keyword kw">else</span>
-        <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_string</span>(<span class="ruby-value">0</span>)
-      <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div id="method-M000009" class="method-detail">
-        <a name="M000009"></a>
-
-        <div class="method-heading">
-
-          <a href="#M000009" class="method-signature">
-
-          <span class="method-name">close</span><span class="method-args">()</span>
-
-          </a>
-
-        </div>
-
-        <div class="method-description">
-
-          <p>
-Closes the database
-</p>
-
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000009-source">
-<pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 16</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close</span>
-      <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_close</span>(<span class="ruby-ivar">@magic_set</span>)
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
-
-        <div class="method-heading">
-
-          <a href="#M000013" class="method-signature">
-
-          <span class="method-name">error</span><span class="method-args">()</span>
-
-          </a>
-
-        </div>
-
-        <div class="method-description">
-
-          <p>
-Returns last error occured
-</p>
-
-          <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000013-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 46</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error</span>
-      <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_error</span>(<span class="ruby-ivar">@magic_set</span>)
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div id="method-M000011" class="method-detail">
-        <a name="M000011"></a>
-
-        <div class="method-heading">
-
-          <a href="#M000011" class="method-signature">
-
-          <span class="method-name">file</span><span class="method-args">(filename)</span>
-
-          </a>
-
-        </div>
-
-        <div class="method-description">
-
-          <p>
-Determine type of a file at given path
-</p>
-
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000011-source">
-<pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 26</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>)
-      <span class="ruby-identifier">result</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_file</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 41</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">string</span>)
+      <span class="ruby-identifier">result</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_buffer</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-identifier">string</span>, <span class="ruby-identifier">string</span>.<span class="ruby-identifier">bytesize</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">null?</span>
         <span class="ruby-identifier">raise</span> <span class="ruby-constant">Exception</span>, <span class="ruby-identifier">error</span>
       <span class="ruby-keyword kw">else</span>
@@ -316,6 +234,148 @@ Determine type of a file at given path
 
           <a href="#M000010" class="method-signature">
 
+          <span class="method-name">close</span><span class="method-args">()</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Closes the database
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 21</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close</span>
+      <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_close</span>(<span class="ruby-ivar">@magic_set</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000014" class="method-signature">
+
+          <span class="method-name">error</span><span class="method-args">()</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Returns the last error occured
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 51</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error</span>
+      <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_error</span>(<span class="ruby-ivar">@magic_set</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000012" class="method-signature">
+
+          <span class="method-name">file</span><span class="method-args">(filename)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Determine type of a file at given path
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 31</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>)
+      <span class="ruby-identifier">result</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_file</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">to_s</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">null?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Exception</span>, <span class="ruby-identifier">error</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_string</span>(<span class="ruby-value">0</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000015" class="method-signature">
+
+          <span class="method-name">flags=</span><span class="method-args">(*flags)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Sets the flags
+</p>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 56</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flags=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
+      <span class="ruby-ivar">@flags</span> = <span class="ruby-identifier">calculate_flags</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
+      <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_setflags</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-ivar">@flags</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000011" class="method-signature">
+
           <span class="method-name">load</span><span class="method-args">(database = nil)</span>
 
           </a>
@@ -329,10 +389,10 @@ Loads given database file (or default if <tt>nil</tt> given)
 </p>
 
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000010-source">
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 21</span>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 26</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load</span>(<span class="ruby-identifier">database</span> = <span class="ruby-keyword kw">nil</span>)
       <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_load</span>(<span class="ruby-ivar">@magic_set</span>, <span class="ruby-identifier">database</span>)
     <span class="ruby-keyword kw">end</span>
@@ -343,12 +403,12 @@ Loads given database file (or default if <tt>nil</tt> given)
       </div>
 
 
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
 
         <div class="method-heading">
 
-          <a href="#M000008" class="method-signature">
+          <a href="#M000009" class="method-signature">
 
           <span class="method-name">open</span><span class="method-args">(*flags)</span>
 
@@ -363,13 +423,46 @@ Opens magic db using given flags
 </p>
 
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/magic/database.rb, line 10</span>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 15</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
-      <span class="ruby-identifier">magic_flags</span> = <span class="ruby-identifier">flags</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">acc</span>, <span class="ruby-identifier">flag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">acc</span> <span class="ruby-operator">|=</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">Flag</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">flag</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>) }
-      <span class="ruby-ivar">@magic_set</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_open</span>(<span class="ruby-identifier">magic_flags</span>)
+      <span class="ruby-ivar">@flags</span> = <span class="ruby-identifier">calculate_flags</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
+      <span class="ruby-ivar">@magic_set</span> = <span class="ruby-constant">Api</span>.<span class="ruby-identifier">magic_open</span>(<span class="ruby-ivar">@flags</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000016" class="method-signature">
+
+          <span class="method-name">calculate_flags</span><span class="method-args">(*flags)</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic/database.rb, line 63</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calculate_flags</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">flags</span>)
+      <span class="ruby-identifier">flags</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">calculated</span>, <span class="ruby-identifier">flag</span><span class="ruby-operator">|</span> <span class="ruby-identifier">calculated</span> <span class="ruby-operator">|=</span> <span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">Flag</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">flag</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

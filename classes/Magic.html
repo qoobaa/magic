@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Module: Magic [magic 0.1.0
+  <title>Module: Magic [magic 0.2.0
 ]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
@@ -64,9 +64,9 @@
         <br />
 
 
-                <a href="../files/lib/magic/constants_rb.html">
+                <a href="../files/lib/magic/database_rb.html">
 
-                lib/magic/constants.rb
+                lib/magic/database.rb
 
                 </a>
 
@@ -84,9 +84,9 @@
         <br />
 
 
-                <a href="../files/lib/magic/database_rb.html">
+                <a href="../files/lib/magic/api_rb.html">
 
-                lib/magic/database.rb
+                lib/magic/api.rb
 
                 </a>
 
@@ -94,9 +94,9 @@
         <br />
 
 
-                <a href="../files/lib/magic/api_rb.html">
+                <a href="../files/lib/magic/constants_rb.html">
 
-                lib/magic/api.rb
+                lib/magic/constants.rb
 
                 </a>
 
@@ -122,6 +122,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
+
+        <a href="#M000007">guess</a>&nbsp;&nbsp;
 
         <a href="#M000001">guess_file_mime</a>&nbsp;&nbsp;
 
@@ -162,6 +164,48 @@ Class <a href="Magic/Exception.html" class="link">Magic::Exception</a><br />
       <h3 class="section-bar">Public Class methods</h3>
 
 
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+
+          <a href="#M000007" class="method-signature">
+
+          <span class="method-name">guess</span><span class="method-args">(*args) {|db| ...}</span>
+
+          </a>
+
+        </div>
+
+        <div class="method-description">
+
+          <p>
+Creates magic database and yields it to the given block
+</p>
+<h5>Example</h5>
+<pre>
+  Magic.guess(:mime) { |db| db.buffer(&quot;Magic® File™&quot;) }
+  # =&gt; &quot;text/plain; charset=utf-8&quot;
+</pre>
+
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/magic.rb, line 64</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">db</span> = <span class="ruby-constant">Database</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">db</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+
+        </div>
+      </div>
+
+
       <div id="method-M000001" class="method-detail">
         <a name="M000001"></a>
 
@@ -169,7 +213,7 @@ Class <a href="Magic/Exception.html" class="link">Magic::Exception</a><br />
 
           <a href="#M000001" class="method-signature">
 
-          <span class="method-name">guess_file_mime</span><span class="method-args">(file)</span>
+          <span class="method-name">guess_file_mime</span><span class="method-args">(filename, *args)</span>
 
           </a>
 
@@ -191,8 +235,8 @@ Guesses mime of given file
           <div class="method-source-code" id="M000001-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 16</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime</span>(<span class="ruby-identifier">file</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:file</span>, <span class="ruby-identifier">:mime</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -208,7 +252,7 @@ Guesses mime of given file
 
           <a href="#M000002" class="method-signature">
 
-          <span class="method-name">guess_file_mime_encoding</span><span class="method-args">(file)</span>
+          <span class="method-name">guess_file_mime_encoding</span><span class="method-args">(filename, *args)</span>
 
           </a>
 
@@ -230,8 +274,8 @@ Guesses mime encoding of given file
           <div class="method-source-code" id="M000002-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 24</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime_encoding</span>(<span class="ruby-identifier">file</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:file</span>, <span class="ruby-identifier">:mime_encoding</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime_encoding</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime_encoding</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -247,7 +291,7 @@ Guesses mime encoding of given file
 
           <a href="#M000003" class="method-signature">
 
-          <span class="method-name">guess_file_mime_type</span><span class="method-args">(file)</span>
+          <span class="method-name">guess_file_mime_type</span><span class="method-args">(filename, *args)</span>
 
           </a>
 
@@ -269,8 +313,8 @@ Guesses mime type of given file
           <div class="method-source-code" id="M000003-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 32</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime_type</span>(<span class="ruby-identifier">file</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:file</span>, <span class="ruby-identifier">:mime_type</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_file_mime_type</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime_type</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -286,7 +330,7 @@ Guesses mime type of given file
 
           <a href="#M000004" class="method-signature">
 
-          <span class="method-name">guess_string_mime</span><span class="method-args">(string)</span>
+          <span class="method-name">guess_string_mime</span><span class="method-args">(string, *args)</span>
 
           </a>
 
@@ -308,8 +352,8 @@ Guesses mime type of given string
           <div class="method-source-code" id="M000004-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 40</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime</span>(<span class="ruby-identifier">string</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:buffer</span>, <span class="ruby-identifier">:mime</span>, <span class="ruby-identifier">string</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">string</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -325,7 +369,7 @@ Guesses mime type of given string
 
           <a href="#M000005" class="method-signature">
 
-          <span class="method-name">guess_string_mime_encoding</span><span class="method-args">(string)</span>
+          <span class="method-name">guess_string_mime_encoding</span><span class="method-args">(string, *args)</span>
 
           </a>
 
@@ -347,8 +391,8 @@ Guesses mime type of given string
           <div class="method-source-code" id="M000005-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 48</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime_encoding</span>(<span class="ruby-identifier">string</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:buffer</span>, <span class="ruby-identifier">:mime_encoding</span>, <span class="ruby-identifier">string</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime_encoding</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime_type</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">string</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -364,7 +408,7 @@ Guesses mime type of given string
 
           <a href="#M000006" class="method-signature">
 
-          <span class="method-name">guess_string_mime_type</span><span class="method-args">(string)</span>
+          <span class="method-name">guess_string_mime_type</span><span class="method-args">(string, *args)</span>
 
           </a>
 
@@ -386,8 +430,8 @@ Guesses mime type of given string
           <div class="method-source-code" id="M000006-source">
 <pre>
 <span class="ruby-comment cmt"># File lib/magic.rb, line 56</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime_type</span>(<span class="ruby-identifier">string</span>)
-      <span class="ruby-identifier">guess</span>(<span class="ruby-identifier">:buffer</span>, <span class="ruby-identifier">:mime_type</span>, <span class="ruby-identifier">string</span>)
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guess_string_mime_type</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">:mime_type</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">db</span><span class="ruby-operator">|</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">string</span>) }
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
