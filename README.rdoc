@@ -1,7 +1,7 @@
 = magic
 
-Ruby FFI bindings to the "magic" library. Determines content type and
-encoding of files and strings. There are three sets of tests,
+Ruby FFI bindings to the "magic" library, that determines content type
+and encoding of files and strings. There are three sets of tests,
 performed in this order: filesystem tests, magic number tests, and
 language tests. The first test that succeeds causes the file type to
 be printed.
