@@ -2,7 +2,7 @@ module Magic
   module Api
     extend FFI::Library
 
-    ffi_lib Library.new.name
+    ffi_lib "magic.1"
 
     attach_function :magic_open, [:int], :pointer
     attach_function :magic_close, [:pointer], :void

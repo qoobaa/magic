@@ -1,7 +1,8 @@
 require "ffi"
 
+ENV["DYLD_FALLBACK_LIBRARY_PATH"] ||= "/opt/local/lib" if FFI::Platform.mac?
+
 require "magic/errors"
-require "magic/library"
 require "magic/api"
 require "magic/constants"
 require "magic/database"
