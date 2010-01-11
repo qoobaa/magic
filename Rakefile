@@ -31,7 +31,7 @@ begin
 | You'll also need to set your PATH environment variable to the     |
 | directory of the magic1.dll file                                  |
 |                                                                   |
-|   set PATH=C:\Program Files\GnuWin32\bin;%PATH%                   |
+|   set PATH=C:\\Program Files\\GnuWin32\\bin;%PATH%                   |
 |                                                                   |
 +-NOTE FOR MAC OS USERS --------------------------------------------+
 |                                                                   |

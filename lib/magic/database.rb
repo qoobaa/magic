@@ -1,9 +1,10 @@
 module Magic
   class Database
-    # Creates an instance of +Magic::Database+ using given flags
-    def initialize(*flags)
+    # Creates an instance of +Magic::Database+ using given database
+    # file and flags
+    def initialize(database_filename = nil, *flags)
       open(*flags)
-      load
+      load(database_filename)
     end
 
     # Opens magic db using given flags
@@ -18,8 +19,8 @@ module Magic
     end
 
     # Loads given database file (or default if +nil+ given)
-    def load(database = nil)
-      Api.magic_load(@magic_set, database)
+    def load(database_filename = nil)
+      Api.magic_load(@magic_set, database_filename)
     end
 
     # Determine type of a file at given path
