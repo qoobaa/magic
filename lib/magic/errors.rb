@@ -1,3 +1,5 @@
 module Magic
-  class Exception < StandardError; end
+  # General Exception class
+  class Exception < StandardError
+  end
 end

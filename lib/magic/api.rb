@@ -1,8 +1,8 @@
 module Magic
-  module Api
+  module Api #:nodoc:
     extend FFI::Library
 
-    ffi_lib "magic.1"
+    ffi_lib "libmagic.so.1", "libmagic.1.dylib", "magic1.dll"
 
     attach_function :magic_open, [:int], :pointer
     attach_function :magic_close, [:pointer], :void

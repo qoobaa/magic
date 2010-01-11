@@ -1,25 +1,30 @@
 module Magic
   class Database
+    # Creates an instance of +Magic::Database+ using given flags
     def initialize(*flags)
       open(*flags)
       load
     end
 
+    # Opens magic db using given flags
     def open(*flags)
       magic_flags = flags.inject(0) { |acc, flag| acc |= Constants::Flag.const_get(flag.to_s.upcase) }
       @magic_set = Api.magic_open(magic_flags)
     end
 
+    # Closes the database
     def close
       Api.magic_close(@magic_set)
     end
 
+    # Loads given database file (or default if +nil+ given)
     def load(database = nil)
       Api.magic_load(@magic_set, database)
     end
 
-    def file(file)
-      result = Api.magic_file(@magic_set, file)
+    # Determine type of a file at given path
+    def file(filename)
+      result = Api.magic_file(@magic_set, filename.to_s)
       if result.null?
         raise Exception, error
       else
@@ -27,6 +32,7 @@ module Magic
       end
     end
 
+    # Determine type of given string
     def buffer(string)
       result = Api.magic_buffer(@magic_set, string, string.bytesize)
       if result.null?
@@ -36,6 +42,7 @@ module Magic
       end
     end
 
+    # Returns last error occured
     def error
       Api.magic_error(@magic_set)
     end
