@@ -1,15 +1,43 @@
 = magic
 
-Description goes here.
+Ruby FFI bindings to the "magic" library. Tests each argument in an
+attempt to classify it. There are three sets of tests, performed in
+this order: filesystem tests, magic number tests, and language
+tests. The first test that succeeds causes the file type to be
+printed.
+
+== Usage
+  require "magic"
+  Magic.guess_file_mime("public/images/rails.png")
+  # => "image/png; charset=binary"
+  Magic.guess_file_mime_encoding("public/images/rails.png")
+  # => "binary"
+  Magic.guess_file_mime_type("public/images/rails.png")
+  # => "image/png"
+  Magic.guess_string_mime("Magic® File™")
+  # => "text/plain; charset=utf-8"
+  Magic.guess_string_mime_encoding("Magic® File™")
+  # => "utf-8"
+  Magic.guess_string_mime_type("Magic® File™")
+  # => "text/plain"
+
+== Links
+* gemcutter[http://gemcutter.org/gems/magic]
+* repository[http://github.com/qoobaa/magic]
+* {issue tracker}[http://github.com/qoobaa/magic/issues]
+* rdoc[http://qoobaa.github.com/magic]
 
 == Note on Patches/Pull Requests
- 
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a future version unintentionally.
-* Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Add tests for it. This is important so I don't break it in a future
+  version unintentionally.
+* Commit, do not mess with rakefile, version, or history. (if you want
+  to have your own version, that is fine but bump version in a commit
+  by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
-
-Copyright (c) 2010 Jakub Kuźma. See LICENSE for details.
+Copyright (c) 2010 Jakub Kuźma. See
+LICENSE[http://github.com/qoobaa/magic/raw/master/LICENSE] for
+details.

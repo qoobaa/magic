@@ -19,7 +19,7 @@ module Magic
 
     # Guesses mime encoding of given file
     # ===== Example
-    #   Magic.guess_file_mime("public/images/rails.png")
+    #   Magic.guess_file_mime_encoding("public/images/rails.png")
     #   # => "binary"
     def guess_file_mime_encoding(file)
       guess(:file, :mime_encoding, file)
