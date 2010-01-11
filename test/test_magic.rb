@@ -42,4 +42,18 @@ class TestMagic < Test::Unit::TestCase
       Magic.guess_file_mime_encoding(fixture("non-existing.file"))
     end
   end
+
+  def test_guess_magic_logo_mime_with_jpeg_database
+    assert_equal "image/jpeg; charset=binary", Magic.guess_file_mime(fixture("filelogo.jpg"), :database => fixture("magic_jpeg"))
+  end
+
+  def test_guess_magic_logo_mime_with_empty_database
+    assert_equal "application/octet-stream; charset=binary", Magic.guess_file_mime(fixture("filelogo.jpg"), :database => fixture("magic_empty"))
+  end
+
+  def test_guess_with_block
+    result = nil
+    Magic.guess(:mime) { |db| result = db.file(fixture("filelogo.jpg")) }
+    assert_equal "image/jpeg; charset=binary", result
+  end
 end

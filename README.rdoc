@@ -7,6 +7,7 @@ language tests. The first test that succeeds causes the file type to
 be printed.
 
 == Usage
+
   require "magic"
   Magic.guess_file_mime("public/images/rails.png")
   # => "image/png; charset=binary"
@@ -20,6 +21,43 @@ be printed.
   # => "utf-8"
   Magic.guess_string_mime_type("Magic® File™")
   # => "text/plain"
+  Magic.guess(:mime_type, :database => "/etc/magic") { |db| db.buffer("Magic® File™") }
+  # => "text/plain"
+
+== Installation
+
+  gem install magic --source=http://gemcutter.org
+
+=== Linux
+
+Install libmagic using your package manager, e.g.:
+
+  sudo apt-get install file
+
+=== Mac OS
+
+If you don't have +libmagic.1.dylib+ file in your system, you need to
+install it via port command:
+
+  sudo port install file
+
+Sometimes you'll also need to set your +DYLD_FALLBACK_LIBRARY_PATH+
+environment variable to the directory of the +libmagic.1.dylib+:
+
+  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
+
+=== Windows
+
+Install "File for
+Windows"[http://gnuwin32.sourceforge.net/packages/file.htm].  You also
+need to set your +PATH+ environment variable to the directory of the
++magic1.dll+ file:
+
+  set PATH=C:\Program Files\GnuWin32\bin;%PATH%
+
+It might be also required to add +:database+ option explicitely:
+
+  Magic.guess_string_mime("Magic® File™", :database => 'C:\Program Files\GnuWin32\share\misc\magic.mgc')
 
 == Links
 * gemcutter[http://gemcutter.org/gems/magic]
@@ -28,6 +66,7 @@ be printed.
 * rdoc[http://qoobaa.github.com/magic]
 
 == Note on Patches/Pull Requests
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a future
@@ -38,6 +77,7 @@ be printed.
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
+
 Copyright (c) 2010 Jakub Kuźma. See
 LICENSE[http://github.com/qoobaa/magic/raw/master/LICENSE] for
 details.

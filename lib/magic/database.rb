@@ -1,16 +1,20 @@
 module Magic
   class Database
+    attr_reader :flags
+
     # Creates an instance of +Magic::Database+ using given database
     # file and flags
-    def initialize(database_filename = nil, *flags)
-      open(*flags)
-      load(database_filename)
+    def initialize(*args)
+      options = args.last.is_a?(Hash) ? args.pop : {} # extract options
+      database = options.delete(:database)
+      open(*args)
+      load(database)
     end
 
     # Opens magic db using given flags
     def open(*flags)
-      magic_flags = flags.inject(0) { |acc, flag| acc |= Constants::Flag.const_get(flag.to_s.upcase) }
-      @magic_set = Api.magic_open(magic_flags)
+      @flags = calculate_flags(*flags)
+      @magic_set = Api.magic_open(@flags)
     end
 
     # Closes the database
@@ -19,8 +23,8 @@ module Magic
     end
 
     # Loads given database file (or default if +nil+ given)
-    def load(database_filename = nil)
-      Api.magic_load(@magic_set, database_filename)
+    def load(database = nil)
+      Api.magic_load(@magic_set, database)
     end
 
     # Determine type of a file at given path
@@ -43,9 +47,21 @@ module Magic
       end
     end
 
-    # Returns last error occured
+    # Returns the last error occured
     def error
       Api.magic_error(@magic_set)
+    end
+
+    # Sets the flags
+    def flags=(*flags)
+      @flags = calculate_flags(*flags)
+      Api.magic_setflags(@magic_set, @flags)
+    end
+
+    protected
+
+    def calculate_flags(*flags)
+      flags.inject(0) { |calculated, flag| calculated |= Constants::Flag.const_get(flag.to_s.upcase) }
     end
   end
 end

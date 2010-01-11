@@ -13,63 +13,59 @@ module Magic
     # ====== Example
     #   Magic.guess_file_mime("public/images/rails.png")
     #   # => "image/png; charset=binary"
-    def guess_file_mime(filename, options = {})
-      guess(options.merge(:method => :file, :target => filename, :flags => [:mime]))
+    def guess_file_mime(filename, *args)
+      guess(*args.unshift(:mime)) { |db| db.file(filename) }
     end
 
     # Guesses mime encoding of given file
     # ===== Example
     #   Magic.guess_file_mime_encoding("public/images/rails.png")
     #   # => "binary"
-    def guess_file_mime_encoding(file, options = {})
-      guess(options.merge(:method => :file, :target => filename, :flags => [:mime_encoding]))
+    def guess_file_mime_encoding(filename, *args)
+      guess(*args.unshift(:mime_encoding)) { |db| db.file(filename) }
     end
 
     # Guesses mime type of given file
     # ===== Example
     #   Magic.guess_file_mime_type("public/images/rails.png")
     #   # => "image/png"
-    def guess_file_mime_type(filename, options = {})
-      guess(options.merge(:method => :file, :target => filename, :flags => [:mime_type]))
+    def guess_file_mime_type(filename, *args)
+      guess(*args.unshift(:mime_type)) { |db| db.file(filename) }
     end
 
     # Guesses mime type of given string
     # ===== Example
     #   Magic.guess_string_mime("Magic® File™")
     #   # => "text/plain; charset=utf-8"
-    def guess_string_mime(string, options = {})
-      guess(options.merge(:method => :buffer, :target => string, :flags => [:mime]))
+    def guess_string_mime(string, *args)
+      guess(*args.unshift(:mime)) { |db| db.buffer(string) }
     end
 
     # Guesses mime type of given string
     # ===== Example
     #   Magic.guess_string_mime_encoding("Magic® File™")
     #   # => "utf-8"
-    def guess_string_mime_encoding(string, options = {})
-      guess(options.merge(:method => :buffer, :target => string, :flags => [:mime_encoding]))
+    def guess_string_mime_encoding(string, *args)
+      guess(*args.unshift(:mime_type)) { |db| db.buffer(string) }
     end
 
     # Guesses mime type of given string
     # ===== Example
     #   Magic.guess_string_mime_type("Magic® File™")
     #   # => "text/plain"
-    def guess_string_mime_type(string, options = {})
-      guess(options.merge(:method => :buffer, :target => string, :flags => [:mime_type]))
+    def guess_string_mime_type(string, *args)
+      guess(*args.unshift(:mime_type)) { |db| db.buffer(string) }
     end
 
-    protected
-
-    def guess(options) #:nodoc:
-      flags = options[:flags]
-      db_filename = options[:db_filename]
-      target = options[:target]
-      method = options[:method]
-
-      db = Database.new(database_filename, *flags)
-      result = db.send(method, target)
-      db.close
-
-      result
+    # Creates magic database and yields it to the given block
+    # ===== Example
+    #   Magic.guess(:mime) { |db| db.buffer("Magic® File™") }
+    #   # => "text/plain; charset=utf-8"
+    def guess(*args)
+      db = Database.new(*args)
+      yield(db).tap do
+        db.close
+      end
     end
   end
 end
