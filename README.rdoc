@@ -41,8 +41,9 @@ install it via port command:
 
   sudo port install file
 
-Sometimes you'll also need to set your <tt>DYLD_FALLBACK_LIBRARY_PATH</tt>
-environment variable to the directory of the <tt>libmagic.1.dylib</tt>:
+Sometimes you also need to set your
+<tt>DYLD_FALLBACK_LIBRARY_PATH</tt> environment variable to the
+directory of the <tt>libmagic.1.dylib</tt>:
 
   export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
 
@@ -55,7 +56,7 @@ need to set your <tt>PATH</tt> environment variable to the directory of the
 
   set PATH=C:\Program Files\GnuWin32\bin;%PATH%
 
-It might be also required to add <tt>:database</tt> option explicitely:
+It might be also required to add <tt>database</tt> option explicitely:
 
   Magic.guess_string_mime("Magic® File™", :database => 'C:\Program Files\GnuWin32\share\misc\magic.mgc')
 
