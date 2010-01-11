@@ -48,14 +48,14 @@ environment variable to the directory of the <tt>libmagic.1.dylib</tt>:
 
 === Windows
 
-Install "File for
-Windows"[http://gnuwin32.sourceforge.net/packages/file.htm].  You also
-need to set your +PATH+ environment variable to the directory of the
-+magic1.dll+ file:
+Install {File for
+Windows}[http://gnuwin32.sourceforge.net/packages/file.htm].  You also
+need to set your <tt>PATH</tt> environment variable to the directory of the
+<tt>magic1.dll</tt> file:
 
   set PATH=C:\Program Files\GnuWin32\bin;%PATH%
 
-It might be also required to add +:database+ option explicitely:
+It might be also required to add <tt>:database</tt> option explicitely:
 
   Magic.guess_string_mime("Magic® File™", :database => 'C:\Program Files\GnuWin32\share\misc\magic.mgc')
 
