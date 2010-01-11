@@ -54,7 +54,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>2010-01-11 13:06:52 +0100</td>
+      <td>2010-01-11 13:51:04 +0100</td>
     </tr>
     </table>
   </div>
@@ -67,8 +67,42 @@
     <div id="description">
       <h1>magic</h1>
 <p>
-Description goes here.
+Ruby FFI bindings to the &#8220;magic&#8221; library. Determines content
+type and encoding of files and strings. There are three sets of tests,
+performed in this order: filesystem tests, magic number tests, and language
+tests. The first test that succeeds causes the file type to be printed.
 </p>
+<h2>Usage</h2>
+<pre>
+  require &quot;magic&quot;
+  Magic.guess_file_mime(&quot;public/images/rails.png&quot;)
+  # =&gt; &quot;image/png; charset=binary&quot;
+  Magic.guess_file_mime_encoding(&quot;public/images/rails.png&quot;)
+  # =&gt; &quot;binary&quot;
+  Magic.guess_file_mime_type(&quot;public/images/rails.png&quot;)
+  # =&gt; &quot;image/png&quot;
+  Magic.guess_string_mime(&quot;Magic® File™&quot;)
+  # =&gt; &quot;text/plain; charset=utf-8&quot;
+  Magic.guess_string_mime_encoding(&quot;Magic® File™&quot;)
+  # =&gt; &quot;utf-8&quot;
+  Magic.guess_string_mime_type(&quot;Magic® File™&quot;)
+  # =&gt; &quot;text/plain&quot;
+</pre>
+<h2>Links</h2>
+<ul>
+<li><a href="http://gemcutter.org/gems/magic">gemcutter</a>
+
+</li>
+<li><a href="http://github.com/qoobaa/magic">repository</a>
+
+</li>
+<li><a href="http://github.com/qoobaa/magic/issues">issue tracker</a>
+
+</li>
+<li><a href="http://qoobaa.github.com/magic">rdoc</a>
+
+</li>
+</ul>
 <h2>Note on Patches/Pull Requests</h2>
 <ul>
 <li>Fork the project.
@@ -92,7 +126,9 @@ I can ignore when I pull)
 </ul>
 <h2>Copyright</h2>
 <p>
-Copyright &#169; 2010 Jakub Kuźma. See LICENSE for details.
+Copyright &#169; 2010 Jakub Kuźma. See <a
+href="http://github.com/qoobaa/magic/raw/master/LICENSE">LICENSE</a> for
+details.
 </p>
 
     </div>
