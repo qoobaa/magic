@@ -1,66 +1,16 @@
 = magic
 
-Ruby FFI bindings to the "magic" library, that determines content type
-and encoding of files and strings. There are three sets of tests,
-performed in this order: filesystem tests, magic number tests, and
-language tests. The first test that succeeds causes the file type to
-be printed.
+Ruby FFI wrapper to the "magic" library, that determines content type
+and encoding of files and strings. The library does three types of
+tests: filesystem tests, magic number tests, and language tests. The
+first test that succeeds causes the file type to be returned.
 
-== Usage
+== Installation and Usage
 
-  require "magic"
-  Magic.guess_file_mime("public/images/rails.png")
-  # => "image/png; charset=binary"
-  Magic.guess_file_mime_encoding("public/images/rails.png")
-  # => "binary"
-  Magic.guess_file_mime_type("public/images/rails.png")
-  # => "image/png"
-  Magic.guess_string_mime("Magic® File™")
-  # => "text/plain; charset=utf-8"
-  Magic.guess_string_mime_encoding("Magic® File™")
-  # => "utf-8"
-  Magic.guess_string_mime_type("Magic® File™")
-  # => "text/plain"
-  Magic.guess(:mime_type, :database => "/etc/magic") { |db| db.buffer("Magic® File™") }
-  # => "text/plain"
-
-== Installation
-
-  gem install magic --source=http://gemcutter.org
-
-=== Linux
-
-Install magic library using your package manager, e.g.:
-
-  sudo apt-get install file
-
-=== Mac OS
-
-If you don't have <tt>libmagic.1.dylib</tt> file in your system, you need to
-install it via port command:
-
-  sudo port install file
-
-Sometimes you also need to set your
-<tt>DYLD_FALLBACK_LIBRARY_PATH</tt> environment variable to the
-directory of the <tt>libmagic.1.dylib</tt>:
-
-  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
-
-=== Windows
-
-Install {File for
-Windows}[http://gnuwin32.sourceforge.net/packages/file.htm].  You also
-need to set your <tt>PATH</tt> environment variable to the directory of the
-<tt>magic1.dll</tt> file:
-
-  set PATH=C:\Program Files\GnuWin32\bin;%PATH%
-
-It might be also required to add <tt>database</tt> option explicitely:
-
-  Magic.guess_string_mime("Magic® File™", :database => 'C:\Program Files\GnuWin32\share\misc\magic.mgc')
+See {project page}[http://jah.pl/projects/magic.html] for details.
 
 == Links
+* {project page}[http://jah.pl/projects/magic.html]
 * gemcutter[http://gemcutter.org/gems/magic]
 * repository[http://github.com/qoobaa/magic]
 * {issue tracker}[http://github.com/qoobaa/magic/issues]
