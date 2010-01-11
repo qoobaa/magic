@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Magic::Constants::Flag [magic 0.1.0
+]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }<\/style>" )
+
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Magic::Constants::Flag</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+
+
+                <a href="../../../files/lib/magic/constants_rb.html">
+
+                lib/magic/constants.rb
+
+                </a>
+
+
+        <br />
+
+            </td>
+        </tr>
+
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+  <div id="contextContent">
+
+   </div>
+
+
+  </div>
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NONE</td>
+          <td>=</td>
+          <td class="context-item-value">0x000000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+No flags
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEBUG</td>
+          <td>=</td>
+          <td class="context-item-value">0x000001</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Turn on debugging
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SYMLINK</td>
+          <td>=</td>
+          <td class="context-item-value">0x000002</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Follow symlinks
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">COMPRESS</td>
+          <td>=</td>
+          <td class="context-item-value">0x000004</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Check inside compressed files
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEVICES</td>
+          <td>=</td>
+          <td class="context-item-value">0x000008</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Look at the contents of devices
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MIME_TYPE</td>
+          <td>=</td>
+          <td class="context-item-value">0x000010</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Return the MIME type
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">CONTINUE</td>
+          <td>=</td>
+          <td class="context-item-value">0x000020</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Return all matches
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">CHECK</td>
+          <td>=</td>
+          <td class="context-item-value">0x000040</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Print warnings to stderr
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">PRESERVE_ATIME</td>
+          <td>=</td>
+          <td class="context-item-value">0x000080</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Restore access time on exit
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RAW</td>
+          <td>=</td>
+          <td class="context-item-value">0x000100</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t translate unprintable chars
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ERROR</td>
+          <td>=</td>
+          <td class="context-item-value">0x000200</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Handle ENOENT etc as real errors
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MIME_ENCODING</td>
+          <td>=</td>
+          <td class="context-item-value">0x000400</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Return the MIME encoding
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">MIME</td>
+          <td>=</td>
+          <td class="context-item-value">(MIME_TYPE | MIME_ENCODING)</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Return the MIME &#8220;type; charset=encoding&#8220;
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">APPLE</td>
+          <td>=</td>
+          <td class="context-item-value">0x000800</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Return the Apple creator and type
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_COMPRESS</td>
+          <td>=</td>
+          <td class="context-item-value">0x001000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check for compressed files
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_TAR</td>
+          <td>=</td>
+          <td class="context-item-value">0x002000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check for tar files
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_SOFT</td>
+          <td>=</td>
+          <td class="context-item-value">0x004000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check magic entries
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_APPTYPE</td>
+          <td>=</td>
+          <td class="context-item-value">0x008000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check application type
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_ELF</td>
+          <td>=</td>
+          <td class="context-item-value">0x010000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check for elf details
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_TEXT</td>
+          <td>=</td>
+          <td class="context-item-value">0x020000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check for text files
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_CDF</td>
+          <td>=</td>
+          <td class="context-item-value">0x040000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check for cdf files
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_TOKENS</td>
+          <td>=</td>
+          <td class="context-item-value">0x100000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check tokens
+
+</td>
+
+        </tr>
+
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NO_CHECK_ENCODING</td>
+          <td>=</td>
+          <td class="context-item-value">0x200000</td>
+
+          <td>&nbsp;</td>
+          <td class="context-item-desc">
+Don&#8217;t check text encodings
+
+</td>
+
+        </tr>
+
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <!-- if method_list -->
+
+
+
+
+  </div>
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
