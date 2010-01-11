@@ -1,10 +1,10 @@
 = magic
 
-Ruby FFI bindings to the "magic" library. Tests each argument in an
-attempt to classify it. There are three sets of tests, performed in
-this order: filesystem tests, magic number tests, and language
-tests. The first test that succeeds causes the file type to be
-printed.
+Ruby FFI bindings to the "magic" library. Determines content type and
+encoding of files and strings. There are three sets of tests,
+performed in this order: filesystem tests, magic number tests, and
+language tests. The first test that succeeds causes the file type to
+be printed.
 
 == Usage
   require "magic"
