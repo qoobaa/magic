@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{magic}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jakub Kuźma"]
@@ -56,18 +56,10 @@ Gem::Specification.new do |s|
 |                                                                   |
 +-NOTE FOR MAC OS USERS --------------------------------------------+
 |                                                                   |
-| If you don't have libmagic.1.dylib file in your system            |
-|                                                                   |
-|   find / -name libmagic.1.dylib                                   |
-|                                                                   |
-| You need to install it via port command                           |
+| If you don't have libmagic.1.dylib file in your system, you need  |
+| to install it using port command                                  |
 |                                                                   |
 |   sudo port install file                                          |
-|                                                                   |
-| Sometimes you'll also need to set your DYLD_FALLBACK_LIBRARY_PATH |
-| environment variable to the directory of the libmagic.1.dylib     |
-|                                                                   |
-|   export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib                |
 |                                                                   |
 +-------------------------------------------------------------------+
 }
@@ -85,14 +77,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ffi>, [">= 0.5.1"])
+      s.add_runtime_dependency(%q<ffi>, [">= 0.6.0"])
       s.add_development_dependency(%q<test-unit>, [">= 2.0"])
     else
-      s.add_dependency(%q<ffi>, [">= 0.5.1"])
+      s.add_dependency(%q<ffi>, [">= 0.6.0"])
       s.add_dependency(%q<test-unit>, [">= 2.0"])
     end
   else
-    s.add_dependency(%q<ffi>, [">= 0.5.1"])
+    s.add_dependency(%q<ffi>, [">= 0.6.0"])
     s.add_dependency(%q<test-unit>, [">= 2.0"])
   end
 end
