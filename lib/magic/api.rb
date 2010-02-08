@@ -2,7 +2,10 @@ module Magic
   module Api #:nodoc:
     extend FFI::Library
 
-    ffi_lib "/opt/local/lib/libmagic.1.dylib", "libmagic.so.1", "libmagic.1.dylib", "magic1.dll"
+    ffi_lib ["/opt/local/lib/libmagic.1.dylib",
+             "libmagic.1.dylib",
+             "libmagic.so.1",
+             "magic1.dll"]
 
     attach_function :magic_open, [:int], :pointer
     attach_function :magic_close, [:pointer], :void

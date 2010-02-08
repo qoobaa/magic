@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      "lib/magic/constants.rb",
      "lib/magic/database.rb",
      "lib/magic/errors.rb",
+     "magic.gemspec",
      "test/fixtures/filelogo.jpg",
      "test/fixtures/magic.txt",
      "test/fixtures/magic_empty",

@@ -12,7 +12,7 @@ begin
     gem.email = "qoobaa@gmail.com"
     gem.homepage = "http://github.com/qoobaa/magic"
     gem.authors = ["Jakub Kuźma"]
-    gem.add_dependency "ffi", ">= 0.5.1"
+    gem.add_dependency "ffi", ">= 0.6.0"
     gem.add_development_dependency "test-unit", ">= 2.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.post_install_message = <<-EOM
@@ -35,18 +35,10 @@ begin
 |                                                                   |
 +-NOTE FOR MAC OS USERS --------------------------------------------+
 |                                                                   |
-| If you don't have libmagic.1.dylib file in your system            |
-|                                                                   |
-|   find / -name libmagic.1.dylib                                   |
-|                                                                   |
-| You need to install it via port command                           |
+| If you don't have libmagic.1.dylib file in your system, you need  |
+| to install it using port command                                  |
 |                                                                   |
 |   sudo port install file                                          |
-|                                                                   |
-| Sometimes you'll also need to set your DYLD_FALLBACK_LIBRARY_PATH |
-| environment variable to the directory of the libmagic.1.dylib     |
-|                                                                   |
-|   export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib                |
 |                                                                   |
 +-------------------------------------------------------------------+
 EOM
