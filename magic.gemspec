@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jakub Ku\305\272ma"]
+  s.authors = ["Jakub Kuźma"]
   s.date = %q{2010-02-10}
   s.description = %q{Ruby FFI bindings to libmagic}
   s.email = %q{qoobaa@gmail.com}
