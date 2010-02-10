@@ -2,10 +2,9 @@ module Magic
   module Api #:nodoc:
     extend FFI::Library
 
-    ffi_lib ["/opt/local/lib/libmagic.1.dylib",
-             "libmagic.1.dylib",
-             "libmagic.so.1",
-             "magic1.dll"]
+    lib_paths = Array(ENV["MAGIC_LIB"] || Dir["/{opt,usr}/{,local/}lib{,64}/libmagic.{1.dylib,so.1*}"])
+    fallback_names = %w(libmagic.1.dylib libmagic.so.1 magic1.dll)
+    ffi_lib(lib_paths + fallback_names)
 
     attach_function :magic_open, [:int], :pointer
     attach_function :magic_close, [:pointer], :void

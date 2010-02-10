@@ -10,6 +10,7 @@ require "magic/database"
 module Magic
   class << self
     # Guesses mime of given file
+    #
     # ====== Example
     #   Magic.guess_file_mime("public/images/rails.png")
     #   # => "image/png; charset=binary"
@@ -18,6 +19,7 @@ module Magic
     end
 
     # Guesses mime encoding of given file
+    #
     # ===== Example
     #   Magic.guess_file_mime_encoding("public/images/rails.png")
     #   # => "binary"
@@ -26,6 +28,7 @@ module Magic
     end
 
     # Guesses mime type of given file
+    #
     # ===== Example
     #   Magic.guess_file_mime_type("public/images/rails.png")
     #   # => "image/png"
@@ -34,6 +37,7 @@ module Magic
     end
 
     # Guesses mime type of given string
+    #
     # ===== Example
     #   Magic.guess_string_mime("Magic® File™")
     #   # => "text/plain; charset=utf-8"
@@ -42,6 +46,7 @@ module Magic
     end
 
     # Guesses mime type of given string
+    #
     # ===== Example
     #   Magic.guess_string_mime_encoding("Magic® File™")
     #   # => "utf-8"
@@ -50,6 +55,7 @@ module Magic
     end
 
     # Guesses mime type of given string
+    #
     # ===== Example
     #   Magic.guess_string_mime_type("Magic® File™")
     #   # => "text/plain"
@@ -58,14 +64,15 @@ module Magic
     end
 
     # Creates magic database and yields it to the given block
+    #
     # ===== Example
     #   Magic.guess(:mime) { |db| db.buffer("Magic® File™") }
     #   # => "text/plain; charset=utf-8"
     def guess(*args)
       db = Database.new(*args)
-      yield(db).tap do
-        db.close
-      end
+      result = yield(db)
+      db.close
+      result
     end
   end
 end
