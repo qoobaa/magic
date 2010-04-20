@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestMagic < Test::Unit::TestCase
   test "guess magic.txt mime" do

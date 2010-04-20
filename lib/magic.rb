@@ -8,6 +8,8 @@ require "magic/constants"
 require "magic/database"
 
 module Magic
+  VERSION = "0.2.5"
+
   class << self
     # Guesses mime of given file
     #
