@@ -6,10 +6,9 @@ require "magic/errors"
 require "magic/api"
 require "magic/constants"
 require "magic/database"
+require "magic/version"
 
 module Magic
-  VERSION = "0.2.5"
-
   class << self
     # Guesses mime of given file
     #
