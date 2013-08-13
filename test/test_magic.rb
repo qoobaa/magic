@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require "helper"
 
 class TestMagic < Test::Unit::TestCase
@@ -44,4 +46,10 @@ class TestMagic < Test::Unit::TestCase
     Magic.guess(:mime) { |db| result = db.file(fixture("filelogo.jpg")) }
     assert_equal "image/jpeg; charset=binary", result
   end
+
+  test "guess encoding from string" do
+    utf8 = "utf-8".force_encoding(Encoding::ASCII_8BIT)
+    assert_equal utf8, Magic.guess_string_mime_encoding('áéíóú')
+  end
+
 end
