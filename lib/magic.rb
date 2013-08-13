@@ -52,7 +52,7 @@ module Magic
     #   Magic.guess_string_mime_encoding("Magic® File™")
     #   # => "utf-8"
     def guess_string_mime_encoding(string, *args)
-      guess(*args.unshift(:mime_type)) { |db| db.buffer(string) }
+      guess(*args.unshift(:mime_encoding)) { |db| db.buffer(string) }
     end
 
     # Guesses mime type of given string
