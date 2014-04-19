@@ -3,8 +3,8 @@ $:.unshift File.expand_path("../lib", __FILE__)
 require "rubygems"
 require "rubygems/specification"
 require "rake/testtask"
-require "rake/rdoctask"
-require "rake/gempackagetask"
+require "rdoc/task"
+require "rubygems/package_task"
 require "magic"
 
 def gemspec
@@ -18,14 +18,14 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-Rake::RDocTask.new do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = "rdoc"
   rdoc.title = "magic #{Magic::VERSION}"
   rdoc.rdoc_files.include("README.rdoc")
   rdoc.rdoc_files.include("lib/**/*.rb")
 end
 
-Rake::GemPackageTask.new(gemspec) do |pkg|
+Gem::PackageTask.new(gemspec) do |pkg|
   pkg.gem_spec = gemspec
 end
 
