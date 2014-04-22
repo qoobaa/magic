@@ -28,7 +28,7 @@ class TestMagic < Test::Unit::TestCase
   end
 
   test "guess non-existing file mime" do
-    assert_raises Magic::Exception do
+    assert_raises Errno::ENOENT do
       Magic.guess_file_mime(fixture("non-existing.file"))
     end
   end

@@ -1,5 +1,5 @@
 module Magic
   # General Exception class
-  class Exception < StandardError
+  class Error < StandardError
   end
 end

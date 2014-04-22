@@ -29,12 +29,10 @@ module Magic
 
     # Determine type of a file at given path
     def file(filename)
-      if !File.exists?(filename)
-        raise Exception, "#{filename}: No such file or directory"
-      end
+      raise Errno::ENOENT, filename unless File.exists?(filename)
       result = Api.magic_file(@magic_set, filename.to_s)
       if result.null?
-        raise Exception, error
+        raise Error, error
       else
         result.get_string(0)
       end
@@ -44,7 +42,7 @@ module Magic
     def buffer(string)
       result = Api.magic_buffer(@magic_set, string, string.bytesize)
       if result.null?
-        raise Exception, error
+        raise Error, error
       else
         result.get_string(0)
       end
