@@ -29,6 +29,9 @@ module Magic
 
     # Determine type of a file at given path
     def file(filename)
+      if !File.exists?(filename)
+        raise Exception, "#{filename}: No such file or directory"
+      end
       result = Api.magic_file(@magic_set, filename.to_s)
       if result.null?
         raise Exception, error

@@ -38,7 +38,7 @@ class TestMagic < Test::Unit::TestCase
   end
 
   test "guess filelogo.jpg mime with empty database" do
-    assert_equal "application/octet-stream; charset=binary", Magic.guess_file_mime(fixture("filelogo.jpg"), :database => fixture("magic_empty"))
+    assert_equal "binary; charset=binary", Magic.guess_file_mime(fixture("filelogo.jpg"), :database => fixture("magic_empty"))
   end
 
   test "guess with block" do
