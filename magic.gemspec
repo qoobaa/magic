@@ -1,28 +1,29 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'magic/version'
 
-lib = File.expand_path("../lib/", __FILE__)
-$:.unshift lib unless $:.include?(lib)
+Gem::Specification.new do |spec|
+  spec.name          = "magic"
+  spec.version       = Magic::VERSION
+  spec.authors       = ["Kuba Kuźma"]
+  spec.email         = ["kuba@jah.pl"]
+  spec.summary       = %q{Determine file type and encoding using "magic" numbers}
+  spec.description   = %q{Ruby FFI bindings to libmagic}
+  spec.homepage      = "https://github.com/qoobaa/magic"
+  spec.license       = "MIT"
 
-require "magic/version"
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
 
-Gem::Specification.new do |s|
-  s.name = "magic"
-  s.version = Magic::VERSION
-  s.platform = Gem::Platform::RUBY
-  s.authors = ["Jakub Kuźma"]
-  s.email = "qoobaa@gmail.com"
-  s.homepage = "http://jah.pl/projects/magic.html"
-  s.summary = 'Determine file type and encoding using "magic" numbers'
-  s.description = "Ruby FFI bindings to libmagic"
+  spec.add_runtime_dependency "ffi", [">= 0.6.3"]
+  spec.add_development_dependency "bundler", "~> 1.5"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "test-unit", [">= 2.0"]
 
-  s.required_rubygems_version = ">= 1.3.6"
-
-  s.add_runtime_dependency "ffi", [">= 0.6.3"]
-  s.add_development_dependency "test-unit", [">= 2.0"]
-
-  s.files = Dir.glob("lib/**/*") + %w(LICENSE README.rdoc)
-
-  s.post_install_message = <<-EOM
+  spec.post_install_message = <<-EOM
 +-NOTE FOR LINUX USERS----------------------------------------------+
 |                                                                   |
 | Install libmagic using your package manager, e.g.                 |

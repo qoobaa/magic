@@ -5,10 +5,11 @@ require "rubygems/specification"
 require "rake/testtask"
 require "rdoc/task"
 require "rubygems/package_task"
+require "bundler/gem_tasks"
 require "magic"
 
 def gemspec
-  file = File.expand_path('../magic.gemspec', __FILE__)
+  file = File.expand_path("../magic.gemspec", __FILE__)
   eval(File.read(file), binding, file)
 end
 
@@ -25,19 +26,4 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include("lib/**/*.rb")
 end
 
-Gem::PackageTask.new(gemspec) do |pkg|
-  pkg.gem_spec = gemspec
-end
-
-desc "Install the gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
-end
-
-desc "Validate the gemspec"
-task :gemspec do
-  gemspec.validate
-end
-
-task :gem => :gemspec
 task :default => :test
