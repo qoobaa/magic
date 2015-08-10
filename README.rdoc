@@ -8,23 +8,23 @@ Installation
 
 == Installation
 
-gem install magic --source http://gemcutter.org
+  gem install magic --source http://gemcutter.org
 
 Linux
 
 Install magic library using your package manager, e.g.:
 
-sudo apt-get install file
+  sudo apt-get install file
 
 Mac OS
 
 If you don’t have libmagic.1.dylib file in your system, you need to install it via port command:
 
-sudo port install file
+  sudo port install file
 
 Sometimes you also need to set your DYLD_FALLBACK_LIBRARY_PATH environment variable to the directory where the libmagic.1.dylib is:
 
-export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
+  export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
 
 Windows
 
