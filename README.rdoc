@@ -4,10 +4,65 @@ Ruby FFI wrapper to the "magic" library, that determines content type
 and encoding of files and strings. The library does three types of
 tests: filesystem tests, magic number tests, and language tests. The
 first test that succeeds causes the file type to be returned.
+Installation
 
-== Installation and Usage
+== Installation
 
-See {project page}[http://jah.pl/projects/magic.html] for details.
+gem install magic --source http://gemcutter.org
+
+Linux
+
+Install magic library using your package manager, e.g.:
+
+sudo apt-get install file
+
+Mac OS
+
+If you don’t have libmagic.1.dylib file in your system, you need to install it via port command:
+
+sudo port install file
+
+Sometimes you also need to set your DYLD_FALLBACK_LIBRARY_PATH environment variable to the directory where the libmagic.1.dylib is:
+
+export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
+
+Windows
+
+Install File for Windows. You also need to set your PATH environment variable to the directory where the magic1.dll is:
+
+  set PATH=C:\Program Files\GnuWin32\bin;%PATH%
+
+It might be also required to add database option explicitly:
+
+  Magic.guess_string_mime(
+    "Magic® File™",
+    :database => 'C:\Program Files\GnuWin32\share\misc\magic.mgc'
+  )
+
+== Usage
+
+  require "magic"
+
+  Magic.guess_file_mime("public/images/rails.png")
+  # => "image/png; charset=binary"
+
+  Magic.guess_file_mime_encoding("public/images/rails.png")
+  # => "binary"
+
+  Magic.guess_file_mime_type("public/images/rails.png")
+  # => "image/png"
+
+  Magic.guess_string_mime("Magic® File™")
+  # => "text/plain; charset=utf-8"
+
+  Magic.guess_string_mime_encoding("Magic® File™")
+  # => "utf-8"
+
+  Magic.guess_string_mime_type("Magic® File™")
+  # => "text/plain"
+
+  Magic.guess(:mime_type, :database => "/etc/magic") { |db| db.buffer("Magic® File™") }
+  # => "text/plain"
 
 == Links
 * {project page}[http://jah.pl/projects/magic.html]
