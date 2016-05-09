@@ -21,6 +21,10 @@ Install magic library using your package manager, e.g.:
 If you don’t have libmagic.1.dylib file in your system, you need to install it via port command:
 
   sudo port install file
+  
+Or for homebrew:
+
+  brew install libmagic
 
 Sometimes you also need to set your DYLD_FALLBACK_LIBRARY_PATH environment variable to the directory where the libmagic.1.dylib is:
 
