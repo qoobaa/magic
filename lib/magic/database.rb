@@ -48,7 +48,7 @@ module Magic
       end
     end
 
-    # Returns the last error occured
+    # Returns the last error occurred
     def error
       Api.magic_error(@magic_set)
     end
